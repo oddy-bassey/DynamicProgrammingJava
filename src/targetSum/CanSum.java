@@ -4,6 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+/*
+ * /*
+ * QUESTION:
+ * Write a function 'canSUm(targetSum, numbers)' that takes in a targetSum
+ * and an array of numbers as arguements.
+ *
+ * The function should return a boolean indicating whether or not it is possible
+ * to generate the targetSum using numbers from the Array.
+ *
+ * NOTE
+ * You may use an element of the array as many times as needed.
+ * you may assume that all input numbers are nonnegative.
+ */
+
 public class CanSum {
     static Logger log = Logger.getLogger(CanSum.class.getName());
     public static boolean canSum(int targetSum, int[] numbers){
@@ -27,11 +41,15 @@ public class CanSum {
 
         for (int number : numbers) {
             int remainder = targetSum-number;
-            sumMap.put(remainder, canSumOptimized(remainder, numbers, sumMap));
-            if(sumMap.get(remainder)) return true;
+
+            if(canSumOptimized(remainder, numbers, sumMap)) {
+                sumMap.put(targetSum, true);
+                return sumMap.get(targetSum);
+            }
         }
 
-        return false;
+        sumMap.put(targetSum, false);
+        return sumMap.get(targetSum);
     }
 
     public static void main(String[] args){
